@@ -8,7 +8,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/bobappleyard/readline"
+	// "github.com/chzyer/readline"
 	"github.com/yuin/gopher-lua"
 	"layeh.com/gopher-luar"
 	"mvdan.cc/sh/v3/interp"
@@ -102,12 +102,12 @@ func splitInput(input string) ([]string, string) {
 	// end my suffering
 	// TODO: refactor this garbage
 	quoted := false
-	startlastcmd := false
-	lastcmddone := false
+	// startlastcmd := false
+	// lastcmddone := false
 	cmdArgs := []string{}
 	sb := &strings.Builder{}
 	cmdstr := &strings.Builder{}
-	lastcmd := readline.GetHistory(readline.HistorySize() - 1)
+	// lastcmd := readline.GetHistory(readline.HistorySize() - 1)
 
 	for _, r := range input {
 		if r == '"' {
@@ -123,22 +123,22 @@ func splitInput(input string) ([]string, string) {
 			// if not quoted and there's a space then add to cmdargs
 			cmdArgs = append(cmdArgs, sb.String())
 			sb.Reset()
-		} else if !quoted && r == '^' && startlastcmd && !lastcmddone {
+		// } else if !quoted && r == '^' && startlastcmd && !lastcmddone {
 			// if ^ is found, isnt in quotes and is
 			// the second occurence of the character and is
 			// the first time "^^" has been used
-			cmdstr.WriteString(lastcmd)
-			sb.WriteString(lastcmd)
+			// cmdstr.WriteString(lastcmd)
+			// sb.WriteString(lastcmd)
+//
+			// startlastcmd = !startlastcmd
+			// lastcmddone = !lastcmddone
 
-			startlastcmd = !startlastcmd
-			lastcmddone = !lastcmddone
-
-			continue
-		} else if !quoted && r == '^' && !lastcmddone {
+			// continue
+		// } else if !quoted && r == '^' && !lastcmddone {
 			// if ^ is found, isnt in quotes and is the
 			// first time of starting "^^"
-			startlastcmd = !startlastcmd
-			continue
+			// startlastcmd = !startlastcmd
+			// continue
 		} else {
 			sb.WriteRune(r)
 		}
@@ -152,8 +152,8 @@ func splitInput(input string) ([]string, string) {
 }
 
 func HandleHistory(cmd string) {
-	readline.AddHistory(cmd)
-	readline.SaveHistory(homedir + "/.hilbish-history")
+	// readline.AddHistory(cmd)
+	// readline.SaveHistory(homedir + "/.hilbish-history")
 	// TODO: load history again (history shared between sessions like this ye)
 }
 

@@ -8,11 +8,11 @@ import (
 	"os/signal"
 	"strings"
 	"bufio"
-	"io"
+	// "io"
 	hooks "hilbish/golibs/bait"
 
 	"github.com/akamensky/argparse"
-	"github.com/bobappleyard/readline"
+	// "github.com/chzyer/readline"
 	"github.com/yuin/gopher-lua"
 
 )
@@ -85,32 +85,32 @@ func main() {
 	HandleSignals()
 	LuaInit()
 
-	readline.Completer = readline.FilenameCompleter
-	readline.LoadHistory(homedir + "/.hilbish-history")
+	// readline.Completer = readline.FilenameCompleter
+	// readline.LoadHistory(homedir + "/.hilbish-history")
 
 	for {
-		input, err := readline.String(fmtPrompt())
-		if err == io.EOF {
+		// input, err := readline.String(fmtPrompt())
+		// if err == io.EOF {
 			// Exit if user presses ^D (ctrl + d)
-			fmt.Println("")
-			break
-		}
-		if err != nil {
+			// fmt.Println("")
+			// break
+		// }
+		// if err != nil {
 			// If we get a completely random error, print
-			fmt.Fprintln(os.Stderr, err)
-		}
-
-		input = strings.TrimSpace(input)
-		if len(input) == 0 { continue }
-
-		if strings.HasSuffix(input, "\\") {
-			for {
-				input, err = ContinuePrompt(strings.TrimSuffix(input, "\\"))
-
-				if err != nil || !strings.HasSuffix(input, "\\") { break }
-			}
-		}
-		RunInput(input)
+			// fmt.Fprintln(os.Stderr, err)
+		// }
+//
+		// input = strings.TrimSpace(input)
+		// if len(input) == 0 { continue }
+//
+		// if strings.HasSuffix(input, "\\") {
+			// for {
+				// input, err = ContinuePrompt(strings.TrimSuffix(input, "\\"))
+//
+				// if err != nil || !strings.HasSuffix(input, "\\") { break }
+			// }
+		// }
+		// RunInput(input)
 	}
 }
 
